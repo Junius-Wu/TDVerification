@@ -44,17 +44,29 @@ public class Read {
 				Element locationI = (Element)oLocation;	
 				
 				UppaalLocation location = new UppaalLocation();
-				
+				location.setId(locationI.attributeValue("id"));
 				location.setName(locationI.element("name").getText());
-
+				location.setFinl(locationI.attributeValue("finl"));
+				location.setInit(locationI.attributeValue("init"));
 				if (locationI.element("label") != null
 						&& locationI.element("label").attributeValue("kind")
 								.equals("invariant")) {//设置x
 					
 					String temp = locationI.element("label").getTextTrim();
-					String[] t = temp.split("=");
+					if (temp.contains("t...t")) {
+						temp = temp.substring(5, temp.length());
+					}
+					StringBuilder sb = new StringBuilder();
+					char[] chars = temp.toCharArray();
 					
-					location.setX(Double.valueOf(t[1]));  
+					for(int i = 0; i < temp.length(); i++) {
+						
+						if (Character.isDigit(chars[i]) || chars[i] == '.') {
+							sb.append(chars[i]);
+						}
+					}
+					
+					location.setX(Double.valueOf(sb.toString()));  
 				}
 				
 				
@@ -93,7 +105,13 @@ public class Read {
 						transition.setToName(label.attributeValue("to"));
 						transition.setName(label.getTextTrim());
 						transition.setTime(Double.valueOf(label.attributeValue("time")));//设置时间time
+						
+						if (!label.attributeValue("duration").equals("null")) {
+							transition.setDuration(Double.valueOf(label.attributeValue("duration").split("<")[1]));
+						}
+						
 						transition.setOut(true);//设置out
+						
 					}
 				}
 				

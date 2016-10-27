@@ -12,7 +12,14 @@ public class UppaalTransition {
 	double x = 0;
 	double time = 0;
 	boolean out =false;
+	double duration;
 	
+	public double getDuration() {
+		return duration;
+	}
+	public void setDuration(double duration) {
+		this.duration = duration;
+	}
 	public String getFromName() {
 		return fromName;
 	}
@@ -26,6 +33,9 @@ public class UppaalTransition {
 		this.toName = toName;
 	}
 	public String getName() {
+		if (name == null) {
+			return "null";
+		}
 		return name;
 	}
 	public void setName(String name) {
