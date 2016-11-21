@@ -18,6 +18,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.jun.util.Display;
+
 import UPPAAL.Read;
 public class ExistTest {
 	public static Scanner cin = new Scanner(System.in);
@@ -68,11 +70,12 @@ public class ExistTest {
 	        }
 	      });
 	    for (UppaalTransition transition : templates.get(0).getTransitions()) {
-			System.out.println(transition.getName() + " " + transition.getTime());
+			Display.println(transition.getName() + " " + transition.getTime());
 			
 		}
-	    
-	    System.out.println("输入要进行的一致性测试:1存在性；2前向一致性；3逆向一致性；4双向一致性测试；5实时测试 ");
+//	    
+	    Display.println("================================输入要进行的一致性测试================================");
+	    Display.println("1存在性；2前向一致性；3逆向一致性；4双向一致性测试；5实时测试 ");
 	    String temp = null;
 	    while(cin.hasNext()) 
 	    {
@@ -81,85 +84,85 @@ public class ExistTest {
 	    	switch(c)
 	    	{
 	    	case "1":
-	    		System.out.println("输入消息序列xxx xxx");
+	    		Display.println("\n输入消息序列xxx xxx");
 	    		 temp = cin.nextLine();
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time1 = findTimeAccordingToInputMessage().get(0);
 	    		if(time1.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
+	    			Display.println("存在此消息序列");
 	    		break;
 	    	
 	    	case "2":
-	    		System.out.println("输入消息序列1  xxx xxx");
+	    		Display.println("输入消息序列1  xxx xxx");
 	    		 temp = cin.nextLine();
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time1 = findTimeAccordingToInputMessage().get(1);
 	    		if(time1.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
-	    		System.out.println("输入消息序列2  xxx xxx");
+	    			Display.println("存在此消息序列");
+	    		Display.println("输入消息序列2  xxx xxx");
 	    		 
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time2 = findTimeAccordingToInputMessage().get(0);
 	    		if(time2.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
+	    			Display.println("存在此消息序列");
 	    		
 	    		if(compare(time1,time2))
-	    			System.out.println("***符合前向一致性");
+	    			Display.println("符合前向一致性");
 	    		else
-	    			System.out.println("***不符合前向一致性");
+	    			Display.println("不符合前向一致性");
 	    		break;
 	    	case "3":
-	    		System.out.println("输入消息序列1  xxx xxx");
+	    		Display.println("输入消息序列1  xxx xxx");
 	    		 temp = cin.nextLine();
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time2 = findTimeAccordingToInputMessage().get(0);
 	    		if(time2.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
-	    		System.out.println("输入消息序列2  xxx xxx");
+	    			Display.println("存在此消息序列");
+	    		Display.println("输入消息序列2  xxx xxx");
 	    		 
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time1 = findTimeAccordingToInputMessage().get(1);
 	    		if(time1.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
+	    			Display.println("存在此消息序列");
 	    		
 	    		if(!compare(time1,time2))
-	    			System.out.println("***符合逆向一致性");
+	    			Display.println("符合逆向一致性");
 	    		else
-	    			System.out.println("***不符合逆向一致性");
+	    			Display.println("不符合逆向一致性");
 	    		break;
 	    	case "4":
-	    		System.out.println("输入消息序列1  xxx xxx");
+	    		Display.println("输入消息序列1  xxx xxx");
 	    		 temp = cin.nextLine();
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time1 = findTimeAccordingToInputMessage().get(1);
 	    		if(time1.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
+	    			Display.println("存在此消息序列");
 	    		
-	    		System.out.println("输入消息序列2  xxx xxx");
+	    		Display.println("输入消息序列2  xxx xxx");
 	    		 
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
@@ -167,55 +170,55 @@ public class ExistTest {
 	    		 time2First = findTimeAccordingToInputMessage().get(0);
 	    		 time2Last =findTimeAccordingToInputMessage().get(1);
 	    		if(time2First.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
+	    			Display.println("存在此消息序列");
 	    		
-	    		System.out.println("输入消息序列3  xxx xxx");
+	    		Display.println("输入消息序列3  xxx xxx");
 	    		 
 	    		 temp = cin.nextLine();
 	    		 inputTransitionNames = temp.split(" ");
 	    		
 	    		 time3 = findTimeAccordingToInputMessage().get(0);
 	    		if(time3.isEmpty())
-	    			{System.out.println("***不存在此消息序列"); break;}
+	    			{Display.println("不存在此消息序列"); break;}
 	    		else
-	    			System.out.println("***存在此消息序列");
+	    			Display.println("存在此消息序列");
 	    		
 	    		if(compare(time1,time2First) && compare(time2Last,time3))
-	    			System.out.println("***符合双向一致性测试");
+	    			Display.println("符合双向一致性测试");
 	    		else
-	    			System.out.println("***不符合双向一致性测试");
+	    			Display.println("不符合双向一致性测试");
 	    		break;
 	    	case "5":
 	    		 f = false;
 	    		 locationX = 0;
 	    		 transitionX = 0;
-	    		System.out.println("输入 最小时间    最大时间");
+	    		Display.println("输入 最小时间    最大时间");
 	    		double min = cin.nextDouble();
 	    		double max = cin.nextDouble();
 	    		UppaalLocation initLocation = templates.get(0).getLocations().get(0);
 	    		UppaalLocation virtualLocation = new UppaalLocation();
 	    		virtualLocation.init = initLocation.init;
 	    		virtualLocation.setTransitions(initLocation.transitions);
-	    		System.out.println("初始状态：" + initLocation.getName());
+	    		Display.println("初始状态：" + initLocation.getName()+"\n");
 	    		// isVisitedLocaiton.add(initLocation);
 	    		isVisitedLocaiton.clear();
 	    		if (searchPathWithRangeOfTime(new UppaalTransition(), virtualLocation, 0, 0, min, max)) {
-					System.out.println("***满足给定约束***");
+					Display.println("满足给定约束");
 				} else {
-					System.out.println("***不满足给定约束***");
+					Display.println("不满足给定约束");
 				}
 	    		
 	    		break;
 	    	default:
-	    		System.out.println("输入错误！");
+	    		Display.println("输入错误！");
 	    		break;
 	    		
 	    	}
 	    
-	    	System.out.println("输入要进行的一致性测试:1存在性；2前向一致性；3逆向一致性；4双向一致性测试；5实时测试 ");
-		    
+	    	Display.println("================================输入要进行的一致性测试================================");
+		    Display.println("1存在性；2前向一致性；3逆向一致性；4双向一致性测试；5实时测试 ");
 	    }
 	    
 	    
@@ -234,6 +237,8 @@ public class ExistTest {
 	}
 	// 查找输入的消息序列  返回消息序列 的 开始时间 和 结束时间
 	private static ArrayList<ArrayList<Double>> findTimeAccordingToInputMessage() {
+		Display.println("\n-------------------------遍历消息-------------------------");
+		
 		HashSet<String> isPrintedSet = new HashSet<>();
 		ArrayList<ArrayList<Double>> res = new ArrayList<>();
 		ArrayList<Double> startTimes =new ArrayList<Double>();
@@ -261,9 +266,8 @@ public class ExistTest {
 							time1 = transitionI.getTime();
 						}
 	    				if (!(isPrintedSet.contains(inputTransitionNames[count] + "--" + transitionI.getTime()))) {
-							System.out.println("********************");
-	    					System.out.println("*找到消息：" + inputTransitionNames[count]);
-							System.out.println("*该消息发生的时间为：" + transitionI.getTime());
+							Display.println("找到消息：" + inputTransitionNames[count]);
+							Display.println("该消息发生的时间为：" + transitionI.getTime()+"\n");
 							isPrintedSet.add(inputTransitionNames[count] + "--" + transitionI.getTime());
 						} 
 	    				
@@ -272,9 +276,9 @@ public class ExistTest {
 							break;
 						}
 					} else { // 下一个外部消息不等于输入的下一个
-						System.out.println("-映射第" + (count+1) + "条消息时不符合");
-						System.out.println("-第" + (count+1) + "条消息：" + transitionI.getName());
-						System.out.println("-输入第" + (count+1) + "条消息：" + inputTransitionNames[count]);
+						Display.println("-映射第" + (count+1) + "条消息时不符合");
+						Display.println("-第" + (count+1) + "条消息：" + transitionI.getName());
+						Display.println("-输入第" + (count+1) + "条消息：" + inputTransitionNames[count]+"\n");
 						break;
 					}
 	    			
@@ -286,7 +290,7 @@ public class ExistTest {
 				if (!startTimes.contains(time0)) { // 不是重复的路径
 					startTimes.add(time0);
 					endTimes.add(time1);
-					System.out.println("********************找到"+ startTimes.size() +"条符合输入消息序列的路径**********************");
+					Display.println("找到"+ startTimes.size() +"条符合输入消息序列的路径\n");
 
 				}
 				
@@ -311,18 +315,19 @@ public class ExistTest {
 	private static boolean searchPathWithRangeOfTime(UppaalTransition lastTransition, UppaalLocation location, double locationMinTime, double transitionMaxTime, double requestMin, double resquestMax) {
 		if (location.getFinl().equals("true")) { // 到达终止节点
 			if (locationMinTime >= requestMin && locationMinTime + transitionMaxTime <= resquestMax) {
-				System.out.println("+终止状态：" + location.getName() + "满足给定的时间要求。");
-				System.out.println("+最小时间：" + locationMinTime + "  最大时间：" + (locationMinTime + transitionMaxTime));
-				System.out.println("+满足时间要求的路径为：");
+				Display.println("终止状态：" + location.getName() + "满足给定的时间要求。\n");
+				Display.println("最小时间：" + locationMinTime + "  最大时间：" + (locationMinTime + transitionMaxTime)+"\n");
+				Display.println("满足时间要求的路径为：");
 				UppaalLocation initLocation = templates.get(0).getLocations().get(0);
-				System.out.print("+" + initLocation.getName());
+				System.out.print(initLocation.getName());
 				for(UppaalLocation locationI : isVisitedLocaiton) {
 					System.out.print("->" + locationI.getName());
 				}
+				Display.println("\n");
 				return true;
 			} else {
-				System.out.println("-到达终止节点，但不满足给定的时间要求！");
-				System.out.println("-最小时间：" + locationMinTime + "  最大时间：" + (locationMinTime + transitionMaxTime));
+				Display.println("到达终止节点，但不满足给定的时间要求！");
+				Display.println("最小时间：" + locationMinTime + "  最大时间：" + (locationMinTime + transitionMaxTime)+"\n");
 				return false;
 			}
 		}
@@ -341,7 +346,7 @@ public class ExistTest {
 			String targetId = "id" + transitionI.getTarget();
 			UppaalLocation targetLocation = locationByKey.get(targetId);
 			if (!isVisitedLocaiton.contains(targetLocation)) {
-				System.out.println("遍历状态：" + targetLocation.getName());
+				Display.println("遍历状态：" + targetLocation.getName()+"\n");
 				isVisitedLocaiton.add(targetLocation);
 				if (searchPathWithRangeOfTime(transitionI, targetLocation, locationMinTime + location.getX(), 
 						transitionMaxTime + transitionI.getDuration(), requestMin, resquestMax)) {
